@@ -2,11 +2,15 @@ package com.security.template.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 @Entity
+
 public class Hall {
 
     @Id
@@ -22,7 +26,8 @@ public class Hall {
     private String contact;
 
     @OneToMany(mappedBy = "halls")
-    @JsonIgnore
+//    @JsonIgnore
+//    @JsonBackReference
     private List<Booking> bookings;
 
     @Embedded

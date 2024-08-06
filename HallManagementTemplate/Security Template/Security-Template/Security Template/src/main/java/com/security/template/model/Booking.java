@@ -2,8 +2,7 @@ package com.security.template.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +14,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
+
 public class Booking {
 
     @Id
@@ -31,11 +31,13 @@ public class Booking {
     @Temporal(TemporalType.DATE)
     private Date todate;
 
+//    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="user_id")
 //     @JsonIgnore
     private User users;
 
+//    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="hall_id")
 //     @JsonIgnore

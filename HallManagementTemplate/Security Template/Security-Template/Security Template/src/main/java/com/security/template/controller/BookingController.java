@@ -32,7 +32,7 @@ public class BookingController {
 
         try{
             Booking booked=bs.bookHalls(books);
-        return new ResponseEntity<>(booked,HttpStatus.CREATED);
+        return new ResponseEntity<>("Registered Successfully",HttpStatus.CREATED);
         }
         catch(RuntimeException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);

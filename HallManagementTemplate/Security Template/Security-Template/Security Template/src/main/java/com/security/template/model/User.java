@@ -1,6 +1,7 @@
 package com.security.template.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.security.template.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,9 +27,12 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    private String phone;
+
+
+
 
     @OneToMany(mappedBy = "users")
+//    @JsonBackReference
     private List<Booking> bookings;
 
     @JsonBackReference
