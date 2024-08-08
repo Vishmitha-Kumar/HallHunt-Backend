@@ -1,6 +1,7 @@
 package com.security.template.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.security.template.enums.Role;
 import jakarta.persistence.*;
@@ -27,14 +28,11 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-
-
-
-
     @OneToMany(mappedBy = "users")
-//    @JsonBackReference
+    @JsonIgnore
     private List<Booking> bookings;
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Hall> halls;
     @JsonBackReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Token> tokens;
@@ -77,4 +75,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

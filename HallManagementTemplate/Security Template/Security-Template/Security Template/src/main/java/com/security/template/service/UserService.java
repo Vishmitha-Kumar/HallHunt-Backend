@@ -43,5 +43,9 @@ public class UserService {
         }
 
     }
-    
+
+    public User fetchById(Long id) {
+
+        return ur.getById(id);
+    }
 }

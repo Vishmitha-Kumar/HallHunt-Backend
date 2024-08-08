@@ -26,21 +26,24 @@ public class Hall {
     private String contact;
 
     @OneToMany(mappedBy = "halls")
-//    @JsonIgnore
+    @JsonIgnore
 //    @JsonBackReference
     private List<Booking> bookings;
 
     @Embedded
     private HallDetails hallDetails;
 
-    @OneToMany(mappedBy = "halls")
-    @JsonIgnore
-    private List<HallImages> hallImages;
+//    @OneToMany(mappedBy = "halls")
+//    @JsonIgnore
+//    private List<HallImages> hallImages;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     public Hall() {}
 
-    public Hall(Long id, String name, String location, String description, String functype, String halltype,
-            String detail, String organiser, String contact, List<Booking> bookings, HallDetails hallDetails) {
+    public Hall(Long id, String name, String location, String description, String functype, String halltype, String detail, String organiser, String contact, List<Booking> bookings, HallDetails hallDetails, User user) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -52,6 +55,7 @@ public class Hall {
         this.contact = contact;
         this.bookings = bookings;
         this.hallDetails = hallDetails;
+        this.user = user;
     }
 
     public Long getId() {
@@ -69,6 +73,7 @@ public class Hall {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getLocation() {
         return location;
@@ -142,5 +147,11 @@ public class Hall {
         this.hallDetails = hallDetails;
     }
 
-    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

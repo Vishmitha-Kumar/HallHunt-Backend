@@ -26,6 +26,8 @@ public class BookingService {
     private UserRepository userRepository;
 
     public Booking bookHalls(Booking booking) {
+
+        
         Optional<User> user = userRepository.findById(booking.getUsers().getId());
         Optional<Hall> hall = hallRepository.findById(booking.getHalls().getId());
 
@@ -74,5 +76,17 @@ public class BookingService {
             throw new RuntimeException("Booking not found");
         }
     }
+
+    public String deleteBooking(Long id) {
+        Optional<Booking> books = bookingRepository.findById(id);
+
+        if (books.isPresent()) {
+            bookingRepository.deleteById(id);
+            return "Booking deleted successfully";
+        } else {
+            return "No Booking found";
+        }
+    }
+
 }
 

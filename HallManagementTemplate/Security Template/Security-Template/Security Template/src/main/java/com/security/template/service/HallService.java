@@ -1,11 +1,18 @@
 package com.security.template.service;
 
+import com.security.template.enums.Role;
 import com.security.template.model.Hall;
 import com.security.template.model.HallDetails;
+import com.security.template.model.User;
 import com.security.template.repo.HallRepository;
+import com.security.template.repo.UserRepo;
+//import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +23,30 @@ public class HallService {
     @Autowired
     private HallRepository hallRepository;
 
+    @Autowired
+    private UserRepo ur;
     public Hall addHalls(Hall halls) {
+
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String email=authentication.getName();
+
+        String emails = authentication.getName();
+
+        Optional<User> user = ur.findByEmail(emails);
+        User foundUser = user.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+
+        if (foundUser.getRole() != Role.ADMIN) {
+//            System.out.println("Only admin can add halls.");
+            throw new RuntimeException("Only admin can add halls.");
+        }
+
+        halls.setUser(foundUser);
+
         return hallRepository.save(halls);
     }
+
+
 
     public Hall updateHall(Long id,Hall halls) {
         Optional<Hall> existingHall = hallRepository.findById(id);
