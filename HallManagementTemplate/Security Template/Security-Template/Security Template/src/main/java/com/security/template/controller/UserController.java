@@ -28,22 +28,14 @@ public class UserController {
     @Autowired
     private UserService service;
 
-//    @PostMapping("/register")
-//    public User postUser(@RequestBody User user) {
-//
-//        return service.postUser(user);
-//    }
+
     
     @GetMapping("/get")
     public List<User> getUser() {
         return service.getUser();
         
     }
-//    @PostMapping("/login")
-//    public String loginUser(@RequestBody Map<String,String> login) {
-//
-//        return service.loginUser(login);
-//    }
+
 
     @GetMapping("/getById/{id}")
     public User fetchById(Long id){
