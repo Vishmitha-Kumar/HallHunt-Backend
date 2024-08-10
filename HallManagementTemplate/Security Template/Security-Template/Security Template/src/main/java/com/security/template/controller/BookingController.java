@@ -1,5 +1,6 @@
 package com.security.template.controller;
 
+import com.security.template.dto.StatusDto;
 import com.security.template.model.Booking;
 import com.security.template.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,26 @@ public class BookingController {
         } else {
             return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PatchMapping("/update-status/{hallID}")
+    public ResponseEntity<?> updateHallStatus(@PathVariable Long hallID, @RequestBody StatusDto hallStatus) {
+
+        try{
+
+            Boolean response = bs.updateHallStatus(hallID, hallStatus);
+
+            if(response)
+                return new ResponseEntity<>("Hall : " + hallID + " updated successfully to status - " + hallStatus.getBookingStatus(), HttpStatus.OK);
+            else
+                return new ResponseEntity<>("Hall not found", HttpStatus.NOT_FOUND);
+
+        }catch (Exception e){
+
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
     
   

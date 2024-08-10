@@ -1,5 +1,6 @@
 package com.security.template.service;
 
+import com.security.template.dto.StatusDto;
 import com.security.template.model.Booking;
 import com.security.template.model.Hall;
 import com.security.template.model.User;
@@ -86,6 +87,23 @@ public class BookingService {
         } else {
             return "No Booking found";
         }
+    }
+
+    public Boolean updateHallStatus(Long hallID, StatusDto hallStatus) {
+
+        Optional<Booking> hallObj = bookingRepository.findById(hallID);
+
+        if(hallObj.isEmpty())
+            return false;
+
+        Booking hallObj1 = hallObj.get();
+        hallObj1.setBookingStatus(hallStatus.getBookingStatus());
+        bookingRepository.save(hallObj1);
+        return true;
+
+    }
+    public List<Booking> getBookedDetails(String status) {
+        return bookingRepository.findAllByBookingStatus(status);
     }
 
 }

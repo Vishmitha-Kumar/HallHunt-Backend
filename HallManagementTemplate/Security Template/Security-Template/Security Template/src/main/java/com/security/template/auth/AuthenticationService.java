@@ -24,7 +24,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final TokenRepo tokenRepo;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public String register(RegisterRequest request) {
         var user  = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
@@ -33,9 +33,7 @@ public class AuthenticationService {
                 .build();
         userRepo.save(user);
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+       return "User Registered successfully";
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {

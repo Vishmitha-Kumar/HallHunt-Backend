@@ -31,6 +31,8 @@ public class Booking {
     @Temporal(TemporalType.DATE)
     private Date todate;
 
+    private String bookingStatus;
+
 //    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -47,8 +49,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(Long id, String occasion, String guest, Long contact, Long budget, String food, Date fromdate,
-            Date todate, User users, Hall halls) {
+    public Booking(Long id, String occasion, String guest, Long contact, Long budget, String food, Date fromdate, Date todate, String bookingStatus, User users, Hall halls) {
         this.id = id;
         this.occasion = occasion;
         this.guest = guest;
@@ -57,6 +58,7 @@ public class Booking {
         this.food = food;
         this.fromdate = fromdate;
         this.todate = todate;
+        this.bookingStatus = bookingStatus;
         this.users = users;
         this.halls = halls;
     }
@@ -125,6 +127,14 @@ public class Booking {
         this.todate = todate;
     }
 
+    public String getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
+
     public User getUsers() {
         return users;
     }
@@ -140,6 +150,4 @@ public class Booking {
     public void setHalls(Hall halls) {
         this.halls = halls;
     }
-
-   
 }
