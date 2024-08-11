@@ -11,55 +11,62 @@ import jakarta.persistence.OneToOne;
 public class HallDetails {
 
 
-    private int vegprice;
-    private int nonvegprice;
+    private int vegPrice;
+    private int nonveg;
     private String reviews;
-    private String guest;
-    private String price;
+    private String guestRange;
+    private String priceRange;
 
 
     public HallDetails() {
     }
-    public HallDetails( int vegprice, int nonvegprice, String reviews, String guest, String price) {
-     
-        this.vegprice = vegprice;
-        this.nonvegprice = nonvegprice;
+
+
+    public HallDetails(int vegPrice, int nonveg, String reviews, String guestRange, String priceRange) {
+        this.vegPrice = vegPrice;
+        this.nonveg = nonveg;
         this.reviews = reviews;
-        this.guest = guest;
-        this.price = price;
+        this.guestRange = guestRange;
+        this.priceRange = priceRange;
     }
-   
-    public int getVegprice() {
-        return vegprice;
+
+    public int getVegPrice() {
+        return vegPrice;
     }
-    public void setVegprice(int vegprice) {
-        this.vegprice = vegprice;
+
+    public void setVegPrice(int vegPrice) {
+        this.vegPrice = vegPrice;
     }
-    public int getNonvegprice() {
-        return nonvegprice;
+
+    public int getNonveg() {
+        return nonveg;
     }
-    public void setNonvegprice(int nonvegprice) {
-        this.nonvegprice = nonvegprice;
+
+    public void setNonveg(int nonveg) {
+        this.nonveg = nonveg;
     }
+
     public String getReviews() {
         return reviews;
     }
+
     public void setReviews(String reviews) {
         this.reviews = reviews;
     }
-    public String getGuest() {
-        return guest;
+
+    public String getGuestRange() {
+        return guestRange;
     }
-    public void setGuest(String guest) {
-        this.guest = guest;
+
+    public void setGuestRange(String guestRange) {
+        this.guestRange = guestRange;
     }
-    public String getPrice() {
-        return price;
+
+    public String getPriceRange() {
+        return priceRange;
     }
-    public void setPrice(String price) {
-        this.price = price;
+
+    public void setPriceRange(String priceRange) {
+        this.priceRange = priceRange;
     }
-   
-    
-    
 }

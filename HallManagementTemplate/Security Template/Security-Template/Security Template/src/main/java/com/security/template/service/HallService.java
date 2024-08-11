@@ -54,12 +54,11 @@ public class HallService {
         if (existingHall.isPresent()) {
             Hall updatedHall = existingHall.get();
 
-            if (halls.getName() != null) updatedHall.setName(halls.getName());
+            if (halls.getHallname() != null) updatedHall.setHallname(halls.getHallname());
             if (halls.getLocation() != null) updatedHall.setLocation(halls.getLocation());
             if (halls.getDescription() != null) updatedHall.setDescription(halls.getDescription());
-            if (halls.getFunctype() != null) updatedHall.setFunctype(halls.getFunctype());
+            if (halls.gettype() != null) updatedHall.settype(halls.gettype());
             if (halls.getHalltype() != null) updatedHall.setHalltype(halls.getHalltype());
-            if (halls.getDetail() != null) updatedHall.setDetail(halls.getDetail());
             if (halls.getOrganiser() != null) updatedHall.setOrganiser(halls.getOrganiser());
             if (halls.getContact() != null) updatedHall.setContact(halls.getContact());
 
@@ -67,11 +66,11 @@ public class HallService {
                 HallDetails newDetails = halls.getHallDetails();
                 HallDetails existingDetails = updatedHall.getHallDetails();
 
-                if (newDetails.getVegprice() != 0) existingDetails.setVegprice(newDetails.getVegprice());
-                if (newDetails.getNonvegprice() != 0) existingDetails.setNonvegprice(newDetails.getNonvegprice());
+                if (newDetails.getVegPrice() != 0) existingDetails.setVegPrice(newDetails.getVegPrice());
+                if (newDetails.getNonveg() != 0) existingDetails.setNonveg(newDetails.getNonveg());
                 if (newDetails.getReviews() != null) existingDetails.setReviews(newDetails.getReviews());
-                if (newDetails.getGuest() != null) existingDetails.setGuest(newDetails.getGuest());
-                if (newDetails.getPrice() != null) existingDetails.setPrice(newDetails.getPrice());
+                if (newDetails.getGuestRange() != null) existingDetails.setGuestRange(newDetails.getGuestRange());
+                if (newDetails.getPriceRange() != null) existingDetails.setPriceRange(newDetails.getPriceRange());
             }
 
             return hallRepository.save(updatedHall);

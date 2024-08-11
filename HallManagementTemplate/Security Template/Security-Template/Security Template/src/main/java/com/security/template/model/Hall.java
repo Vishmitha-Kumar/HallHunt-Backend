@@ -16,12 +16,12 @@ public class Hall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String hallname;
     private String location;
     private String description;
-    private String functype;
+    private String type;
     private String halltype;
-    private String detail;
+
     private String organiser;
     private String contact;
 
@@ -43,14 +43,13 @@ public class Hall {
     private User user;
     public Hall() {}
 
-    public Hall(Long id, String name, String location, String description, String functype, String halltype, String detail, String organiser, String contact, List<Booking> bookings, HallDetails hallDetails, User user) {
+    public Hall(Long id, String hallname, String location, String description, String type, String halltype, String organiser, String contact, List<Booking> bookings, HallDetails hallDetails, User user) {
         this.id = id;
-        this.name = name;
+        this.hallname = hallname;
         this.location = location;
         this.description = description;
-        this.functype = functype;
+        this.type = type;
         this.halltype = halltype;
-        this.detail = detail;
         this.organiser = organiser;
         this.contact = contact;
         this.bookings = bookings;
@@ -66,12 +65,12 @@ public class Hall {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getHallname() {
+        return hallname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHallname(String hallname) {
+        this.hallname =hallname;
     }
 
 
@@ -91,12 +90,12 @@ public class Hall {
         this.description = description;
     }
 
-    public String getFunctype() {
-        return functype;
+    public String gettype() {
+        return type;
     }
 
-    public void setFunctype(String functype) {
-        this.functype = functype;
+    public void settype(String type) {
+        this.type = type;
     }
 
     public String getHalltype() {
@@ -107,13 +106,7 @@ public class Hall {
         this.halltype = halltype;
     }
 
-    public String getDetail() {
-        return detail;
-    }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
 
     public String getOrganiser() {
         return organiser;
