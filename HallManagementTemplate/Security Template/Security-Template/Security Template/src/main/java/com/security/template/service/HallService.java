@@ -48,7 +48,7 @@ public class HallService {
 
 
 
-    public Hall updateHall(Long id,Hall halls) {
+    public Hall updateHall(Long id, Hall halls) {
         Optional<Hall> existingHall = hallRepository.findById(id);
 
         if (existingHall.isPresent()) {
@@ -66,6 +66,11 @@ public class HallService {
                 HallDetails newDetails = halls.getHallDetails();
                 HallDetails existingDetails = updatedHall.getHallDetails();
 
+                if (existingDetails == null) {
+                    existingDetails = new HallDetails();
+                    updatedHall.setHallDetails(existingDetails);
+                }
+
                 if (newDetails.getVegPrice() != 0) existingDetails.setVegPrice(newDetails.getVegPrice());
                 if (newDetails.getNonveg() != 0) existingDetails.setNonveg(newDetails.getNonveg());
                 if (newDetails.getReviews() != null) existingDetails.setReviews(newDetails.getReviews());
@@ -80,9 +85,15 @@ public class HallService {
     }
 
     public String deleteHall(Long id) {
-        hallRepository.deleteById(id);
-        return "Deleted successfully";
+        Optional<Hall> hall = hallRepository.findById(id);
+        if (hall.isPresent()) {
+            hallRepository.deleteById(id);
+            return "Deleted successfully";
+        } else {
+            throw new RuntimeException("Hall not found");
+        }
     }
+
 
     public Optional<Hall> getHalls(Long id) {
        return hallRepository.findById(id);
