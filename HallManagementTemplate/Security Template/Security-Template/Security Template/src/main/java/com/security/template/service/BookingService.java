@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
@@ -26,11 +28,17 @@ public class BookingService {
     @Autowired
     private UserRepository userRepository;
 
-    public Booking bookHalls(Booking booking) {
+    @Autowired
+    private UserService us;
+
+    @Autowired
+    private  HallService hs;
+
+    public Booking bookHalls(Booking booking,Long userID,Long hallID) {
 
         
-        Optional<User> user = userRepository.findById(booking.getUsers().getId());
-        Optional<Hall> hall = hallRepository.findById(booking.getHalls().getId());
+        Optional<User> user = userRepository.findById(userID);
+        Optional<Hall> hall = hallRepository.findById(hallID);
 
         if (user.isPresent() && hall.isPresent()) {
             booking.setUsers(user.get());
@@ -104,6 +112,18 @@ public class BookingService {
     }
     public List<Booking> getBookedDetails(String status) {
         return bookingRepository.findAllByBookingStatus(status);
+    }
+
+
+    public List<Booking> getBookingRequestsForOwner(Long userID) {
+        List<Long> ownedHalls = hs.getHallDetailsByUser(userID)
+                .stream().map(Hall::getId).toList();
+        List<Booking> bookings= new ArrayList<>();
+        for (Long id : ownedHalls) {
+            List<Booking> hallObj = bookingRepository.findByHalls_Id(id);
+            bookings.addAll(hallObj);
+        }
+        return bookings;
     }
 
 }

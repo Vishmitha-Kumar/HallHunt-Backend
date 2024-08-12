@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface HallRepository extends JpaRepository<Hall, Long> {
 
     // String deleteAllById(Long id);
-    
+    List<Hall> findByUser_Id(Long userId);
 
-    
+
 }

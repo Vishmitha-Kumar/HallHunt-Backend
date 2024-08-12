@@ -34,6 +34,7 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Booking> bookings;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Hall> halls;
     @JsonBackReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

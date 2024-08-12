@@ -37,9 +37,10 @@ public class Hall {
 //    @JsonIgnore
 //    private List<HallImages> hallImages;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
     public Hall() {}
 

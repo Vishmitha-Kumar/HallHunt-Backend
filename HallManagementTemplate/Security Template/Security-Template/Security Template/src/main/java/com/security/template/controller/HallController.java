@@ -28,35 +28,35 @@ public class HallController {
 
     @PostMapping("/addHalls")
     public ResponseEntity<?> addHalls(@RequestBody Hall halls){
-            return new ResponseEntity<>(hallService.addHalls(halls), HttpStatus.CREATED);
-    } 
-    
+        return new ResponseEntity<>(hallService.addHalls(halls), HttpStatus.CREATED);
+    }
+
     @GetMapping("/getHall/{id}")
-   public ResponseEntity<?> getHalls(@PathVariable Long id){
-    return new ResponseEntity<>(hallService.getHalls(id),HttpStatus.OK);
-   }
-    
-   @GetMapping("/getAlls")
-   public ResponseEntity<?> getAllHall(){
-    return new ResponseEntity<>(hallService.getAllHall(),HttpStatus.OK);
-   }
+    public ResponseEntity<?> getHalls(@PathVariable Long id){
+        return new ResponseEntity<>(hallService.getHalls(id),HttpStatus.OK);
+    }
 
-   @PutMapping("/putHall/{id}")
-   public ResponseEntity<?> updateHall ( @PathVariable Long id,@RequestBody Hall halls) {
-    try {
-        Hall updatedHall = hallService.updateHall(id,halls);
-        return new ResponseEntity<>(updatedHall, HttpStatus.OK);
-    } catch (RuntimeException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }  
-   }
+    @GetMapping("/getAlls")
+    public ResponseEntity<?> getAllHall(){
+        return new ResponseEntity<>(hallService.getAllHall(),HttpStatus.OK);
+    }
 
-   @DeleteMapping("/deleteHall/{id}")
-   public String deleteHall(@PathVariable Long id){
-    return hallService.deleteHall(id);
-   }
-   
+    @PutMapping("/putHall/{id}")
+    public ResponseEntity<?> updateHall ( @PathVariable Long id,@RequestBody Hall halls) {
+        try {
+            Hall updatedHall = hallService.updateHall(id,halls);
+            return new ResponseEntity<>(updatedHall, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/deleteHall/{id}")
+    public String deleteHall(@PathVariable Long id){
+        return hallService.deleteHall(id);
+    }
 
 
-    
+
+
 }

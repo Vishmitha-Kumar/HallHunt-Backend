@@ -96,4 +96,9 @@ public class HallService {
     public Hall getHallById(Long hallId) {
         return hallRepository.findById(hallId).orElseThrow(() -> new RuntimeException("Hall not found"));
     }
+
+    public List<Hall> getHallDetailsByUser(Long userId) {
+        return hallRepository.findByUser_Id(userId);
+    }
+
 }
