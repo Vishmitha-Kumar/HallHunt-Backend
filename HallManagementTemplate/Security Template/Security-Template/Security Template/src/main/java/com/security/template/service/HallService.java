@@ -36,7 +36,7 @@ public class HallService {
         User foundUser = user.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 
-        if (foundUser.getRole() != Role.ADMIN) {
+        if (foundUser.getRole() != Role.OWNER) {
 //            System.out.println("Only admin can add halls.");
             throw new RuntimeException("Only admin can add halls.");
         }
@@ -57,7 +57,7 @@ public class HallService {
             if (halls.getHallname() != null) updatedHall.setHallname(halls.getHallname());
             if (halls.getLocation() != null) updatedHall.setLocation(halls.getLocation());
             if (halls.getDescription() != null) updatedHall.setDescription(halls.getDescription());
-            if (halls.gettype() != null) updatedHall.settype(halls.gettype());
+            if (halls.getType() != null) updatedHall.setType(halls.getType());
             if (halls.getHalltype() != null) updatedHall.setHalltype(halls.getHalltype());
             if (halls.getOrganiser() != null) updatedHall.setOrganiser(halls.getOrganiser());
             if (halls.getContact() != null) updatedHall.setContact(halls.getContact());

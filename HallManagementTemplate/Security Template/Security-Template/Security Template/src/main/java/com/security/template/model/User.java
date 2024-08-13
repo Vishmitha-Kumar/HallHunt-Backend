@@ -30,12 +30,12 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "users")
-    @JsonIgnore
-    private List<Booking> bookings;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<Hall> halls;
+//    @OneToMany(mappedBy = "users")
+//    @JsonIgnore
+//    private List<Booking> bookings;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonManagedReference
+//    private List<Hall> halls;
     @JsonBackReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Token> tokens;

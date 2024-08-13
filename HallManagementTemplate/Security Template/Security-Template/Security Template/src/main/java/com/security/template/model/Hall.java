@@ -8,9 +8,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-
+@ToString
 public class Hall {
 
     @Id
@@ -25,10 +26,10 @@ public class Hall {
     private String organiser;
     private String contact;
 
-    @OneToMany(mappedBy = "halls")
-    @JsonIgnore
+//    @OneToMany(mappedBy = "halls")
+//    @JsonIgnore
 //    @JsonBackReference
-    private List<Booking> bookings;
+//    private List<Booking> bookings;
 
     @Embedded
     private HallDetails hallDetails;
@@ -38,13 +39,16 @@ public class Hall {
 //    private List<HallImages> hallImages;
 
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User user;
-    public Hall() {}
 
-    public Hall(Long id, String hallname, String location, String description, String type, String halltype, String organiser, String contact, List<Booking> bookings, HallDetails hallDetails, User user) {
+//    @JoinColumn(name = "user_id")
+//    @JsonBackReference
+    @ManyToOne
+    private User user;
+
+    public Hall() {
+    }
+
+    public Hall(Long id, String hallname, String location, String description, String type, String halltype, String organiser, String contact, HallDetails hallDetails, User user) {
         this.id = id;
         this.hallname = hallname;
         this.location = location;
@@ -53,7 +57,6 @@ public class Hall {
         this.halltype = halltype;
         this.organiser = organiser;
         this.contact = contact;
-        this.bookings = bookings;
         this.hallDetails = hallDetails;
         this.user = user;
     }
@@ -71,9 +74,8 @@ public class Hall {
     }
 
     public void setHallname(String hallname) {
-        this.hallname =hallname;
+        this.hallname = hallname;
     }
-
 
     public String getLocation() {
         return location;
@@ -91,11 +93,11 @@ public class Hall {
         this.description = description;
     }
 
-    public String gettype() {
+    public String getType() {
         return type;
     }
 
-    public void settype(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -106,8 +108,6 @@ public class Hall {
     public void setHalltype(String halltype) {
         this.halltype = halltype;
     }
-
-
 
     public String getOrganiser() {
         return organiser;
@@ -123,14 +123,6 @@ public class Hall {
 
     public void setContact(String contact) {
         this.contact = contact;
-    }
-
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
     }
 
     public HallDetails getHallDetails() {

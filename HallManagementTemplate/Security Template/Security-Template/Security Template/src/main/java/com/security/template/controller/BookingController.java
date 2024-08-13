@@ -105,7 +105,7 @@ public class BookingController {
 
     }
     @GetMapping("/get/requests")
-    public ResponseEntity<?> fetchBookingRequests() {
+    public ResponseEntity<?> fetchBookingRequestsForManager() {
 
         try{
 
@@ -125,6 +125,25 @@ public class BookingController {
 
 
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PatchMapping("/approveBooking/{id}")
+    public ResponseEntity<?> approveBooking(@PathVariable Long id) {
+        try {
+            Booking updatedBooking = bs.updateBookingStatus(id, "Approved");
+            return new ResponseEntity<>(updatedBooking, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PatchMapping("/denyBooking/{id}")
+    public ResponseEntity<?> denyBooking(@PathVariable Long id) {
+        try {
+            Booking updatedBooking = bs.updateBookingStatus(id, "Denied"); // Assuming 'Denied' is the status for denied bookings
+            return new ResponseEntity<>(updatedBooking, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 

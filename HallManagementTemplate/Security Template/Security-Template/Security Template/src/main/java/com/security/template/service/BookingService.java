@@ -116,14 +116,36 @@ public class BookingService {
 
 
     public List<Booking> getBookingRequestsForOwner(Long userID) {
+
         List<Long> ownedHalls = hs.getHallDetailsByUser(userID)
                 .stream().map(Hall::getId).toList();
+
+        System.out.println(userID);
+
         List<Booking> bookings= new ArrayList<>();
         for (Long id : ownedHalls) {
             List<Booking> hallObj = bookingRepository.findByHalls_Id(id);
             bookings.addAll(hallObj);
         }
         return bookings;
+    }
+
+    public Booking updateBookingStatus(Long id, String status) {
+        Optional<Booking> existingBooking = bookingRepository.findById(id);
+
+        if (existingBooking.isPresent()) {
+            Booking booking = existingBooking.get();
+            booking.setBookingStatus(status);
+            return bookingRepository.save(booking);
+        } else {
+            throw new RuntimeException("Booking not found");
+        }
+    }
+
+    public List<Booking> getAllBooking() {
+        return bookingRepository.findAll().stream().peek(booking -> {
+            booking.getHalls().getName(); // Ensure hall name is fetched
+        }).collect(Collectors.toList());
     }
 
 }
