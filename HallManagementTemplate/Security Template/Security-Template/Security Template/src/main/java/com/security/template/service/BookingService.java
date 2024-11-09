@@ -142,11 +142,11 @@ public class BookingService {
         }
     }
 
-    public List<Booking> getAllBooking() {
-        return bookingRepository.findAll().stream().peek(booking -> {
-            booking.getHalls().getName(); // Ensure hall name is fetched
-        }).collect(Collectors.toList());
-    }
+//    public List<Booking> getAllBooking() {
+//        return bookingRepository.findAll().stream().peek(booking -> {
+//            booking.getHalls().getName(); // Ensure hall name is fetched
+//        }).collect(Collectors.toList());
+//    }
 
 }
 
